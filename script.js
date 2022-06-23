@@ -7,6 +7,9 @@ const playPauseIcon = playPauseController.querySelector('.PlayPause')
 const progressBar = document.querySelector('[progressbar]')
 const progressBarFilled = document.querySelector('[progressbar-filled]')
 
+const currentTime = document.querySelector('[video-current-time]')
+const videoDuration = document.querySelector('[video-duration]')
+
 const playPause = (video) => {
   if (video.paused) {
     video.play()
@@ -61,3 +64,28 @@ progressBar.addEventListener('click', (e) => rewind(e, videoSrc, progressBar))
 progressBar.addEventListener('mousemove', (e) => mousedown && rewind(e, videoSrc, progressBar))
 progressBar.addEventListener('mousedown', () => (mousedown = true))
 progressBar.addEventListener('mouseup', () => (mousedown = false))
+
+function formatTime(seconds) {
+  let minutes = Math.floor(seconds / 60)
+  minutes = minutes >= 10 ? minutes : '0' + minutes
+  seconds = Math.floor(seconds % 60)
+  seconds = seconds >= 10 ? seconds : '0' + seconds
+  return minutes + ':' + seconds
+}
+
+videoSrc.addEventListener('loadedmetadata', () => setVideoDuration(videoSrc, videoDuration))
+
+videoSrc.addEventListener('timeupdate', () => handleProgress(videoSrc, currentTime))
+
+function handleProgress(video, currentTime) {
+  currentTime.textContent = formatTime(video.currentTime)
+}
+
+function setVideoDuration(video, elem) {
+  elem.textContent = formatTime(video.duration)
+}
+
+// Video finished playing
+videoSrc.addEventListener('ended', () => {
+  playPauseIcon.classList.add('is-paused')
+})
