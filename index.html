@@ -21,7 +21,7 @@
       <div class="vd-player" style="--height: 50vh; --ui-color: purple; --progress-bar-color: cyan">
      -->
     <div class="vd-player">
-      <video video-src>
+      <video video-src autoplay muted>
         <source src="https://www.tbilisiwomensconference.org/uploads_script/banner/05_22/Promo%20B2.mp4" />
       </video>
 
@@ -30,11 +30,11 @@
           <div class="controls__buttons">
             <!-- Play/Pause -->
             <button class="vd-player__play-pause" play-pause aria-label="toggle play">
-              <div class="PlayPause is-paused" aria-hidden="true"></div>
+              <div class="PlayPause" aria-hidden="true"></div>
             </button>
 
             <!-- Mute/Unmute -->
-            <button class="vd-player__toggle-mute toggle-mute" mute-unmute aria-label="toggle sound">
+            <button class="vd-player__toggle-mute toggle-mute muted" mute-unmute aria-label="toggle sound">
               <svg
                 class="sound-on"
                 xmlns="http://www.w3.org/2000/svg"
